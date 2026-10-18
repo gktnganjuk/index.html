@@ -25,12 +25,31 @@
       padding: 16px;
     }
 
+    /* =========================
+       HEADER
+    ========================= */
+
     .header {
       background: white;
       border-radius: 20px;
       padding: 24px 20px 18px;
       margin-bottom: 16px;
       box-shadow: 0 4px 18px rgba(0,0,0,0.07);
+      text-align: center;
+    }
+
+    .logo-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 14px;
+    }
+
+    .logo {
+      width: 95px;
+      height: 95px;
+      object-fit: contain;
+      border-radius: 12px;
     }
 
     .brand {
@@ -44,18 +63,24 @@
     h1 {
       margin: 0;
       font-size: 27px;
+      line-height: 1.25;
     }
 
     .subtitle {
-      margin-top: 7px;
+      margin-top: 8px;
       color: #68776f;
       font-size: 14px;
       line-height: 1.5;
     }
 
+    /* =========================
+       FILTER
+    ========================= */
+
     .filters {
       display: flex;
       flex-wrap: wrap;
+      justify-content: center;
       gap: 7px;
       margin-top: 18px;
     }
@@ -69,6 +94,7 @@
       cursor: pointer;
       font-size: 13px;
       font-weight: 600;
+      transition: 0.2s;
     }
 
     .filter-btn:hover {
@@ -86,6 +112,10 @@
       font-size: 12px;
       color: #738079;
     }
+
+    /* =========================
+       RANKING CARD
+    ========================= */
 
     .ranking-card {
       background: white;
@@ -112,6 +142,11 @@
     .student-row {
       padding: 14px 16px;
       border-bottom: 1px solid #edf1ef;
+      transition: background 0.2s;
+    }
+
+    .student-row:hover {
+      background: #f8fbf9;
     }
 
     .student-row:last-child {
@@ -140,6 +175,26 @@
       font-weight: bold;
     }
 
+    /* =========================
+       TOP 3
+    ========================= */
+
+    .student-row.top-1 .rank {
+      font-size: 20px;
+    }
+
+    .student-row.top-2 .rank {
+      font-size: 19px;
+    }
+
+    .student-row.top-3 .rank {
+      font-size: 18px;
+    }
+
+    /* =========================
+       STATUS
+    ========================= */
+
     .loading,
     .empty,
     .error {
@@ -153,13 +208,22 @@
       color: #a43d3d;
     }
 
+    /* =========================
+       FOOTER
+    ========================= */
+
     .footer {
       text-align: center;
       margin-top: 18px;
       padding-bottom: 20px;
       color: #89958f;
       font-size: 11px;
+      line-height: 1.5;
     }
+
+    /* =========================
+       MOBILE
+    ========================= */
 
     @media (max-width: 600px) {
 
@@ -168,8 +232,17 @@
       }
 
       .header {
-        padding: 20px 16px 16px;
+        padding: 20px 14px 16px;
         border-radius: 16px;
+      }
+
+      .logo {
+        width: 80px;
+        height: 80px;
+      }
+
+      .brand {
+        font-size: 11px;
       }
 
       h1 {
@@ -180,9 +253,18 @@
         font-size: 13px;
       }
 
+      .filters {
+        gap: 6px;
+      }
+
+      .filter-btn {
+        padding: 7px 10px;
+        font-size: 12px;
+      }
+
       .table-head,
       .student-row {
-        grid-template-columns: 45px 1fr 60px 75px;
+        grid-template-columns: 43px 1fr 58px 72px;
       }
 
       .table-head {
@@ -194,35 +276,61 @@
         padding: 13px 9px;
       }
 
-      .name {
-        font-size: 14px;
-      }
-
-      .class {
-        font-size: 11px;
-      }
-
-      .points {
-        font-size: 12px;
-      }
-
       .rank {
         font-size: 14px;
       }
 
-      .filter-btn {
-        padding: 7px 11px;
-        font-size: 12px;
+      .student-row.top-1 .rank {
+        font-size: 18px;
+      }
+
+      .student-row.top-2 .rank {
+        font-size: 17px;
+      }
+
+      .student-row.top-3 .rank {
+        font-size: 16px;
+      }
+
+      .name {
+        font-size: 13px;
+      }
+
+      .class {
+        font-size: 10px;
+      }
+
+      .points {
+        font-size: 11px;
+      }
+
+      .footer {
+        font-size: 10px;
       }
     }
   </style>
 </head>
 
+
 <body>
 
 <div class="container">
 
+  <!-- =========================
+       HEADER
+  ========================== -->
+
   <div class="header">
+
+    <div class="logo-container">
+
+      <img
+        src="Logo%20Rumah%20Wiyata.jpeg"
+        alt="Logo Rumah Belajar Wiyata"
+        class="logo"
+      >
+
+    </div>
 
     <div class="brand">
       RUMAH BELAJAR WIYATA
@@ -237,41 +345,80 @@
       usaha, dan perkembangan siswa.
     </div>
 
-    <div id="filters" class="filters">
-      <button class="filter-btn active" onclick="setFilter('Semua')">
+    <div
+      id="filters"
+      class="filters"
+    >
+
+      <button
+        class="filter-btn active"
+        onclick="setFilter('Semua')"
+      >
         Semua
       </button>
+
     </div>
 
-    <div id="status" class="status">
+    <div
+      id="status"
+      class="status"
+    >
       Mengambil data terbaru...
     </div>
 
   </div>
 
 
+  <!-- =========================
+       RANKING
+  ========================== -->
+
   <div class="ranking-card">
 
     <div class="table-head">
-      <div>Rank</div>
-      <div>Nama Siswa</div>
-      <div>Kelas</div>
+
+      <div>
+        Rank
+      </div>
+
+      <div>
+        Nama Siswa
+      </div>
+
+      <div>
+        Kelas
+      </div>
+
       <div style="text-align:right;">
         Total Poin
       </div>
+
     </div>
 
+
     <div id="ranking">
+
       <div class="loading">
         Memuat ranking...
       </div>
+
     </div>
 
   </div>
 
 
+  <!-- =========================
+       FOOTER
+  ========================== -->
+
   <div class="footer">
-    Rumah Belajar Wiyata · Data diperbarui otomatis dari sistem poin.
+
+    Rumah Belajar Wiyata<br>
+
+    <span>
+      Data diperbarui otomatis dari sistem poin.
+    </span>
+
   </div>
 
 </div>
@@ -279,141 +426,170 @@
 
 <script>
 
-  /*
-   * =====================================================
-   * SUMBER DATA GOOGLE SHEETS
-   * =====================================================
-   */
+/*
+=====================================================
+SUMBER DATA GOOGLE SHEETS
+=====================================================
+*/
 
-  const DATA_URL =
-    "https://docs.google.com/spreadsheets/d/e/2PACX-1vQu6_7c6WpAVAFIpcottbuhRYGUAIVN6E0_-E3YOsMTDUYE4teUj1IGVwJBmZVbN7d1WqB_mpbAfQ8G/pub?gid=581223473&single=true&output=csv";
-
-
-  let allStudents = [];
-  let activeFilter = "Semua";
+const DATA_URL =
+"https://docs.google.com/spreadsheets/d/e/2PACX-1vQu6_7c6WpAVAFIpcottbuhRYGUAIVN6E0_-E3YOsMTDUYE4teUj1IGVwJBmZVbN7d1WqB_mpbAfQ8G/pub?gid=581223473&single=true&output=csv";
 
 
-  /*
-   * =====================================================
-   * LOAD DATA
-   * =====================================================
-   */
+let allStudents = [];
 
-  async function loadRanking() {
-
-    const status =
-      document.getElementById("status");
-
-    try {
-
-      status.textContent =
-        "Mengambil data terbaru...";
-
-      const response =
-        await fetch(DATA_URL + "&t=" + Date.now());
-
-      if (!response.ok) {
-        throw new Error(
-          "Google Sheets tidak dapat diakses."
-        );
-      }
-
-      const csv =
-        await response.text();
-
-      const data =
-        parseCSV(csv);
-
-      if (data.length < 2) {
-
-        throw new Error(
-          "Data ranking belum tersedia."
-        );
-
-      }
-
-      /*
-       * Baris pertama = header
-       */
-
-      const headers =
-        data[0].map(h =>
-          h.trim()
-        );
+let activeFilter = "Semua";
 
 
-      const rows =
-        data.slice(1);
+/*
+=====================================================
+LOAD DATA
+=====================================================
+*/
+
+async function loadRanking() {
+
+  const status =
+    document.getElementById("status");
 
 
-      /*
-       * Cari posisi kolom berdasarkan
-       * nama header.
-       */
+  try {
 
-      const rankingIndex =
-        findHeader(
-          headers,
-          ["Ranking"]
-        );
-
-      const namaIndex =
-        findHeader(
-          headers,
-          ["Nama Siswa", "Nama"]
-        );
-
-      const kelasIndex =
-        findHeader(
-          headers,
-          ["Kelas"]
-        );
-
-      const poinIndex =
-        findHeader(
-          headers,
-          ["Total Poin", "Poin"]
-        );
+    status.textContent =
+      "Mengambil data terbaru...";
 
 
-      if (
-        namaIndex === -1 ||
-        kelasIndex === -1 ||
-        poinIndex === -1
-      ) {
-
-        throw new Error(
-          "Header Ranking Publik tidak sesuai."
-        );
-
-      }
+    const response =
+      await fetch(
+        DATA_URL + "&t=" + Date.now()
+      );
 
 
-      /*
-       * Bentuk data siswa
-       */
+    if (!response.ok) {
 
-      allStudents =
-        rows
-          .filter(row =>
-            row.some(cell =>
-              cell.trim() !== ""
+      throw new Error(
+        "Google Sheets tidak dapat diakses."
+      );
+
+    }
+
+
+    const csv =
+      await response.text();
+
+
+    const data =
+      parseCSV(csv);
+
+
+    if (data.length < 2) {
+
+      throw new Error(
+        "Data ranking belum tersedia."
+      );
+
+    }
+
+
+    /*
+    Header
+    */
+
+    const headers =
+      data[0].map(
+        h => h.trim()
+      );
+
+
+    const rows =
+      data.slice(1);
+
+
+    /*
+    Cari kolom
+    */
+
+    const rankingIndex =
+      findHeader(
+        headers,
+        ["Ranking"]
+      );
+
+
+    const namaIndex =
+      findHeader(
+        headers,
+        [
+          "Nama Siswa",
+          "Nama"
+        ]
+      );
+
+
+    const kelasIndex =
+      findHeader(
+        headers,
+        ["Kelas"]
+      );
+
+
+    const poinIndex =
+      findHeader(
+        headers,
+        [
+          "Total Poin",
+          "Poin"
+        ]
+      );
+
+
+    if (
+      namaIndex === -1 ||
+      kelasIndex === -1 ||
+      poinIndex === -1
+    ) {
+
+      throw new Error(
+        "Header Ranking Publik tidak sesuai."
+      );
+
+    }
+
+
+    /*
+    Bentuk data siswa
+    */
+
+    allStudents =
+      rows
+
+        .filter(
+          row =>
+            row.some(
+              cell =>
+                cell.trim() !== ""
             )
-          )
-          .map((row, index) => {
+        )
+
+        .map(
+          (row, index) => {
 
             const nama =
               row[namaIndex] || "";
 
+
             const kelas =
               row[kelasIndex] || "";
+
 
             const poin =
               parseFloat(
                 String(
                   row[poinIndex] || "0"
-                ).replace(",", ".")
+                )
+                .replace(",", ".")
               ) || 0;
+
 
             return {
 
@@ -433,574 +609,735 @@
 
             };
 
-          })
-          .filter(student =>
-            student.nama !== ""
-          );
-
-
-      /*
-       * Urutkan ulang berdasarkan poin.
-       * Jadi walaupun spreadsheet berubah,
-       * ranking tetap benar.
-       */
-
-      allStudents.sort(
-        (a, b) => {
-
-          if (b.poin !== a.poin) {
-            return b.poin - a.poin;
           }
+        )
 
-          return a.nama.localeCompare(
-            b.nama,
-            "id"
-          );
-
-        }
-      );
-
-
-      /*
-       * Buat ranking 1,2,3,...
-       */
-
-      allStudents =
-        allStudents.map(
-          (student, index) => ({
-
-            ...student,
-
-            ranking:
-              index + 1
-
-          })
+        .filter(
+          student =>
+            student.nama !== ""
         );
 
 
-      createFilters();
+    /*
+    Urutkan berdasarkan poin
+    */
 
-      renderRanking();
+    allStudents.sort(
+      (a, b) => {
+
+        if (
+          b.poin !== a.poin
+        ) {
+
+          return (
+            b.poin -
+            a.poin
+          );
+
+        }
 
 
-      status.textContent =
-        allStudents.length +
-        " siswa dalam ranking.";
+        return a.nama.localeCompare(
+          b.nama,
+          "id"
+        );
 
-    }
+      }
+    );
 
-    catch (error) {
 
-      console.error(error);
+    /*
+    Buat ranking ulang
+    */
 
-      status.textContent =
-        "Gagal memuat data.";
+    allStudents =
+      allStudents.map(
+        (student, index) => ({
 
-      document.getElementById(
-        "ranking"
-      ).innerHTML =
+          ...student,
 
-        `<div class="error">
-          ${escapeHTML(error.message)}
-        </div>`;
+          ranking:
+            index + 1
 
-    }
+        })
+      );
+
+
+    /*
+    Buat filter
+    */
+
+    createFilters();
+
+
+    /*
+    Tampilkan
+    */
+
+    renderRanking();
+
+
+    status.textContent =
+      allStudents.length +
+      " siswa dalam ranking.";
 
   }
 
 
-  /*
-   * =====================================================
-   * FILTER
-   * =====================================================
-   */
+  catch (error) {
 
-  function createFilters() {
-
-    const container =
-      document.getElementById(
-        "filters"
-      );
+    console.error(error);
 
 
-    const classes = [
+    status.textContent =
+      "Gagal memuat data.";
+
+
+    document.getElementById(
+      "ranking"
+    ).innerHTML =
+
+      `<div class="error">
+        ${escapeHTML(
+          error.message
+        )}
+      </div>`;
+
+  }
+
+}
+
+
+/*
+=====================================================
+FILTER
+=====================================================
+*/
+
+function createFilters() {
+
+  const container =
+    document.getElementById(
+      "filters"
+    );
+
+
+  const classes =
+    [
       ...new Set(
         allStudents
-          .map(student =>
-            student.kelas
+
+          .map(
+            student =>
+              student.kelas
           )
-          .filter(Boolean)
+
+          .filter(
+            Boolean
+          )
       )
     ];
 
 
-    /*
-     * Urutan kelas:
-     * TK A
-     * TK B
-     * 1 - 9
-     */
+  /*
+  Urutan kelas
+  */
 
-    const order = [
-      "A",
-      "B",
-      "1",
-      "2",
-      "3",
-      "4",
-      "5",
-      "6",
-      "7",
-      "8",
-      "9"
-    ];
+  const order = [
 
+    "A",
+    "B",
 
-    classes.sort(
-      (a, b) => {
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+    "7",
+    "8",
+    "9"
 
-        const ai =
-          order.indexOf(a);
-
-        const bi =
-          order.indexOf(b);
-
-        return (
-          (ai === -1 ? 999 : ai) -
-          (bi === -1 ? 999 : bi)
-        );
-
-      }
-    );
+  ];
 
 
-    container.innerHTML = "";
+  classes.sort(
+    (a, b) => {
+
+      const ai =
+        order.indexOf(a);
 
 
-    /*
-     * Tombol Semua
-     */
-
-    addFilterButton(
-      container,
-      "Semua",
-      "Semua"
-    );
+      const bi =
+        order.indexOf(b);
 
 
-    /*
-     * Tombol kelas
-     */
+      return (
 
-    classes.forEach(
-      kelas => {
+        (ai === -1
+          ? 999
+          : ai)
 
-        let label;
+        -
 
-        if (kelas === "A") {
+        (bi === -1
+          ? 999
+          : bi)
 
-          label = "TK A";
+      );
 
-        }
-        else if (kelas === "B") {
-
-          label = "TK B";
-
-        }
-        else {
-
-          label =
-            "Kelas " + kelas;
-
-        }
+    }
+  );
 
 
-        addFilterButton(
-          container,
-          kelas,
-          label
-        );
-
-      }
-    );
-
-  }
+  container.innerHTML = "";
 
 
-  function addFilterButton(
+  /*
+  Semua
+  */
+
+  addFilterButton(
     container,
-    value,
-    label
-  ) {
-
-    const button =
-      document.createElement(
-        "button"
-      );
-
-
-    button.className =
-      "filter-btn" +
-      (
-        activeFilter === value
-          ? " active"
-          : ""
-      );
-
-
-    button.textContent =
-      label;
-
-
-    button.onclick =
-      function() {
-
-        setFilter(value);
-
-      };
-
-
-    container.appendChild(
-      button
-    );
-
-  }
-
-
-  function setFilter(value) {
-
-    activeFilter =
-      value;
-
-    createFilters();
-
-    renderRanking();
-
-  }
+    "Semua",
+    "Semua"
+  );
 
 
   /*
-   * =====================================================
-   * TAMPILKAN RANKING
-   * =====================================================
-   */
+  TK dan kelas
+  */
 
-  function renderRanking() {
+  classes.forEach(
+    kelas => {
 
-    const container =
-      document.getElementById(
-        "ranking"
-      );
+      let label;
 
 
-    let students;
+      if (kelas === "A") {
 
-
-    if (
-      activeFilter === "Semua"
-    ) {
-
-      students =
-        allStudents;
-
-    }
-    else {
-
-      students =
-        allStudents.filter(
-          student =>
-            student.kelas ===
-            activeFilter
-        );
-
-    }
-
-
-    if (!students.length) {
-
-      container.innerHTML =
-        `<div class="empty">
-          Belum ada data siswa.
-        </div>`;
-
-      return;
-
-    }
-
-
-    /*
-     * Jika filter kelas digunakan,
-     * ranking ditampilkan berdasarkan
-     * urutan poin dalam kelas tersebut.
-     */
-
-    container.innerHTML =
-      students.map(
-        (student, index) => {
-
-          return `
-
-            <div class="student-row">
-
-              <div class="rank">
-                ${index + 1}
-              </div>
-
-              <div class="name">
-                ${escapeHTML(
-                  student.nama
-                )}
-              </div>
-
-              <div class="class">
-                ${formatClass(
-                  student.kelas
-                )}
-              </div>
-
-              <div class="points">
-                ${formatNumber(
-                  student.poin
-                )} poin
-              </div>
-
-            </div>
-
-          `;
-
-        }
-      ).join("");
-
-  }
-
-
-  /*
-   * =====================================================
-   * CSV PARSER
-   * =====================================================
-   */
-
-  function parseCSV(text) {
-
-    const rows = [];
-
-    let row = [];
-
-    let cell = "";
-
-    let insideQuotes = false;
-
-
-    for (
-      let i = 0;
-      i < text.length;
-      i++
-    ) {
-
-      const char =
-        text[i];
-
-      const next =
-        text[i + 1];
-
-
-      if (
-        char === '"' &&
-        insideQuotes &&
-        next === '"'
-      ) {
-
-        cell += '"';
-
-        i++;
+        label = "TK A";
 
       }
 
-      else if (
-        char === '"'
-      ) {
+      else if (kelas === "B") {
 
-        insideQuotes =
-          !insideQuotes;
-
-      }
-
-      else if (
-        char === "," &&
-        !insideQuotes
-      ) {
-
-        row.push(cell);
-
-        cell = "";
-
-      }
-
-      else if (
-        (
-          char === "\n" ||
-          char === "\r"
-        ) &&
-        !insideQuotes
-      ) {
-
-        if (
-          char === "\r" &&
-          next === "\n"
-        ) {
-
-          i++;
-
-        }
-
-        row.push(cell);
-
-        rows.push(row);
-
-        row = [];
-
-        cell = "";
+        label = "TK B";
 
       }
 
       else {
 
-        cell += char;
+        label =
+          "Kelas " +
+          kelas;
 
       }
 
-    }
 
-
-    if (
-      cell !== "" ||
-      row.length
-    ) {
-
-      row.push(cell);
-
-      rows.push(row);
+      addFilterButton(
+        container,
+        kelas,
+        label
+      );
 
     }
+  );
+
+}
 
 
-    return rows;
+/*
+=====================================================
+BUTTON FILTER
+=====================================================
+*/
 
-  }
+function addFilterButton(
+  container,
+  value,
+  label
+) {
 
-
-  /*
-   * =====================================================
-   * CARI HEADER
-   * =====================================================
-   */
-
-  function findHeader(
-    headers,
-    possibleNames
-  ) {
-
-    for (
-      const name of possibleNames
-    ) {
-
-      const index =
-        headers.findIndex(
-          header =>
-            header.toLowerCase() ===
-            name.toLowerCase()
-        );
-
-
-      if (index !== -1) {
-
-        return index;
-
-      }
-
-    }
-
-
-    return -1;
-
-  }
-
-
-  /*
-   * =====================================================
-   * FORMAT
-   * =====================================================
-   */
-
-  function formatClass(kelas) {
-
-    if (kelas === "A") {
-      return "TK A";
-    }
-
-    if (kelas === "B") {
-      return "TK B";
-    }
-
-    if (kelas) {
-      return "Kelas " +
-        escapeHTML(kelas);
-    }
-
-    return "-";
-
-  }
-
-
-  function formatNumber(number) {
-
-    return Number(
-      number
-    ).toLocaleString(
-      "id-ID"
+  const button =
+    document.createElement(
+      "button"
     );
 
-  }
+
+  button.className =
+    "filter-btn" +
+
+    (
+      activeFilter === value
+        ? " active"
+        : ""
+    );
+
+
+  button.textContent =
+    label;
+
+
+  button.onclick =
+    function() {
+
+      setFilter(value);
+
+    };
+
+
+  container.appendChild(
+    button
+  );
+
+}
+
+
+/*
+=====================================================
+SET FILTER
+=====================================================
+*/
+
+function setFilter(value) {
+
+  activeFilter =
+    value;
+
+
+  createFilters();
+
+
+  renderRanking();
+
+}
+
+
+/*
+=====================================================
+RENDER RANKING
+=====================================================
+*/
+
+function renderRanking() {
+
+  const container =
+    document.getElementById(
+      "ranking"
+    );
+
+
+  let students;
 
 
   /*
-   * =====================================================
-   * SECURITY
-   * =====================================================
-   */
+  Semua siswa
+  */
 
-  function escapeHTML(text) {
+  if (
+    activeFilter === "Semua"
+  ) {
 
-    return String(text)
-      .replace(
-        /[&<>"']/g,
-        function(char) {
+    students =
+      allStudents;
 
-          const map = {
+  }
 
-            "&": "&amp;",
-            "<": "&lt;",
-            ">": "&gt;",
-            '"': "&quot;",
-            "'": "&#039;"
+  /*
+  Berdasarkan kelas
+  */
 
-          };
+  else {
 
-          return map[char];
-
-        }
+    students =
+      allStudents.filter(
+        student =>
+          student.kelas ===
+          activeFilter
       );
 
   }
 
 
-  /*
-   * =====================================================
-   * MULAI
-   * =====================================================
-   */
+  if (
+    !students.length
+  ) {
 
-  loadRanking();
+    container.innerHTML =
+
+      `<div class="empty">
+        Belum ada data siswa.
+      </div>`;
+
+    return;
+
+  }
+
+
+  /*
+  Tampilkan
+  */
+
+  container.innerHTML =
+
+    students.map(
+      (student, index) => {
+
+        let topClass = "";
+
+        if (index === 0) {
+          topClass = " top-1";
+        }
+
+        else if (index === 1) {
+          topClass = " top-2";
+        }
+
+        else if (index === 2) {
+          topClass = " top-3";
+        }
+
+
+        return `
+
+          <div
+            class="student-row${topClass}"
+          >
+
+            <div class="rank">
+
+              ${
+                index === 0
+                  ? "🥇"
+                  : index === 1
+                  ? "🥈"
+                  : index === 2
+                  ? "🥉"
+                  : index + 1
+              }
+
+            </div>
+
+
+            <div class="name">
+
+              ${escapeHTML(
+                student.nama
+              )}
+
+            </div>
+
+
+            <div class="class">
+
+              ${formatClass(
+                student.kelas
+              )}
+
+            </div>
+
+
+            <div class="points">
+
+              ${formatNumber(
+                student.poin
+              )}
+              poin
+
+            </div>
+
+          </div>
+
+        `;
+
+      }
+    ).join("");
+
+}
+
+
+/*
+=====================================================
+CSV PARSER
+=====================================================
+*/
+
+function parseCSV(text) {
+
+  const rows = [];
+
+  let row = [];
+
+  let cell = "";
+
+  let insideQuotes = false;
+
+
+  for (
+    let i = 0;
+    i < text.length;
+    i++
+  ) {
+
+    const char =
+      text[i];
+
+
+    const next =
+      text[i + 1];
+
+
+    /*
+    Double quote
+    */
+
+    if (
+      char === '"' &&
+      insideQuotes &&
+      next === '"'
+    ) {
+
+      cell += '"';
+
+      i++;
+
+    }
+
+
+    /*
+    Quote
+    */
+
+    else if (
+      char === '"'
+    ) {
+
+      insideQuotes =
+        !insideQuotes;
+
+    }
+
+
+    /*
+    Koma
+    */
+
+    else if (
+      char === "," &&
+      !insideQuotes
+    ) {
+
+      row.push(cell);
+
+      cell = "";
+
+    }
+
+
+    /*
+    Baris baru
+    */
+
+    else if (
+      (
+        char === "\n" ||
+        char === "\r"
+      ) &&
+      !insideQuotes
+    ) {
+
+      if (
+        char === "\r" &&
+        next === "\n"
+      ) {
+
+        i++;
+
+      }
+
+
+      row.push(cell);
+
+      rows.push(row);
+
+      row = [];
+
+      cell = "";
+
+    }
+
+
+    else {
+
+      cell += char;
+
+    }
+
+  }
+
+
+  /*
+  Data terakhir
+  */
+
+  if (
+    cell !== "" ||
+    row.length
+  ) {
+
+    row.push(cell);
+
+    rows.push(row);
+
+  }
+
+
+  return rows;
+
+}
+
+
+/*
+=====================================================
+FIND HEADER
+=====================================================
+*/
+
+function findHeader(
+  headers,
+  possibleNames
+) {
+
+  for (
+    const name of possibleNames
+  ) {
+
+    const index =
+      headers.findIndex(
+        header =>
+          header.toLowerCase() ===
+          name.toLowerCase()
+      );
+
+
+    if (
+      index !== -1
+    ) {
+
+      return index;
+
+    }
+
+  }
+
+
+  return -1;
+
+}
+
+
+/*
+=====================================================
+FORMAT KELAS
+=====================================================
+*/
+
+function formatClass(kelas) {
+
+  if (
+    kelas === "A"
+  ) {
+
+    return "TK A";
+
+  }
+
+
+  if (
+    kelas === "B"
+  ) {
+
+    return "TK B";
+
+  }
+
+
+  if (kelas) {
+
+    return (
+      "Kelas " +
+      escapeHTML(kelas)
+    );
+
+  }
+
+
+  return "-";
+
+}
+
+
+/*
+=====================================================
+FORMAT ANGKA
+=====================================================
+*/
+
+function formatNumber(
+  number
+) {
+
+  return Number(
+    number
+  ).toLocaleString(
+    "id-ID"
+  );
+
+}
+
+
+/*
+=====================================================
+AMAN DARI HTML INJECTION
+=====================================================
+*/
+
+function escapeHTML(
+  text
+) {
+
+  return String(text)
+    .replace(
+      /[&<>"']/g,
+      function(char) {
+
+        const map = {
+
+          "&": "&amp;",
+          "<": "&lt;",
+          ">": "&gt;",
+          '"': "&quot;",
+          "'": "&#039;"
+
+        };
+
+
+        return map[char];
+
+      }
+    );
+
+}
+
+
+/*
+=====================================================
+JALANKAN
+=====================================================
+*/
+
+loadRanking();
 
 </script>
 
